@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Restaurant List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="restaurant : ${restaurants}">
+        <td th:text="${restaurant.getRestId}"></td>
+        <td th:text="${restaurant.getRestName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

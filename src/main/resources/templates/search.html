@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d7b33c946deab659af266ae276ed039&libraries=services"></script>
+    <script src="js/under768nav.js"></script>
+    <script src="js/sidebar.js"></script>
+</head>
+<body>
+<div class="header">
+    <a style="float: right;">
+        <div class="menubar-toggle-btn" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </a>
+    <h1>식당 검색 서비스</h1>
+</div>
+<div class="topnav">
+    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>
+    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>
+    <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>내 정보</a>
+    <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>설정</a>
+</div>
+<div class="row">
+    <div class="leftsidebar">
+        <a href="#" class="closebtn" onclick="closeSidebar()">x</a>
+        <h2>Left Sidebar</h2>
+        <p>Some content in the left sidebar</p>
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>검색</h2>
+            <form>
+                <input type="text" placeholder="식당 이름 또는 키워드를 입력하세요." name="search">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>검색 결과</h2>
+            <p>검색 결과가 없습니다.</p>
+        </div>
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>필터</h2>
+            <h3>음식 종류</h3>
+            <ul>
+                <li><input type="checkbox" id="korean" name="korean" value="korean"> <label for="korean">한식</label></li>
+                <li><input type="checkbox" id="chinese" name="chinese" value="chinese"> <label for="chinese">중식</label></li>
+                <li><input type="checkbox" id="japanese" name="japanese" value="japanese"> <label for="japanese">일식</label></li>
+                <li><input type="checkbox" id="western" name="western" value="western"> <label for="western">양식</label></li>
+            </ul>
+            <h3>가격대</h3>
+            <ul>
+                <li><input type="radio" id="price-1" name="price" value="1"> <label for="price-1">1만원 미만</label></li>
+                <li><input type="radio" id="price-2" name="price" value="2"> <label for="price-2">1만원 이상 3만원 미만</label></li>
+                <li><input type="radio" id="price-3" name="price" value="3"> <label for="price-3">3만원 이상 5만원 미만</label></li>
+                <li><input type="radio" id="price-4" name="price" value="4"> <label for="price-4">5만원 이상</label></li>
+            </ul>
+            <h3>거리</h3>
+            <ul>
+                <li><input type="radio" id="distance-1" name="distance" value="1"> <label for="distance-1">500m 이내</label></li>
+                <li><input type="radio" id="distance-2" name="distance" value="2"> <label for="distance-2">1km 이내</label></li>
+                <li><input type="radio" id="distance-3" name="distance" value="3"> <label for="distance-3">3km 이내</label></li>
+                <li><input type="radio" id="distance-4" name="distance" value="4"> <label for="distance-4">5km 이내</label></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

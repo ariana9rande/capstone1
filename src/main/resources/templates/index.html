@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script type="text/javascript"
+            th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=2d7b33c946deab659af266ae276ed039&libraries=services}"></script>
+    <script th:src="@{/js/under768nav.js}"></script>
+    <script th:src="@{/js/sidebar.js}"></script>
+</head>
+<body>
+<div class="header">
+    <div>
+        <a th:href="@{/members/new}">회원가입</a>
+        <a th:href="@{/login}">로그인</a>
+        <a th:href="@{/members}">회원 목록</a>
+        <a th:href="@{/restaurants}">식당 목록</a>
+        <p th:if="${session.loginMember != null and session.loginMember.memberName != null}"
+           th:text="${session.loginMember.memberName} + '님'" style="float:right;"></p>
+    </div>
+    <div class="menubar-toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <h1>Test</h1>
+</div>
+<div class="topnav">
+    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>
+    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>
+    <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>내 정보</a>
+    <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>설정</a>
+</div>
+<div class="row">
+    <div class="leftsidebar">
+        <a href="#" class="closebtn" onclick='closeSidebar()'>x</a>
+        <h2>Left Sidebar</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a, faucibus pharetra odio. Maecenas quis nunc nibh.</p>
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>현재 위치</h2>
+            <h3 id="location"></h3>
+        </div>
+        <div class="card">
+            <h1 style="text-align: center;">식당 목록</h1>
+            <select style="float: right;">
+                <option value="거리">거리순</option>
+                <option value="평점">평점순</option>
+            </select>
+        </div>
+        <div class="card" th:each="restaurant : ${restaurants}">
+            <div class="card-body" style="display: flex;"
+                        th:onclick="|location.href='@{/{restId}(restId=${restaurant.restId})}'|">
+                <img th:src="${restaurant.image}" style="width: 200px; height: 200px;">
+                <div style="display: flex; flex-direction: column; margin-left: 20px;">
+                    <h2 th:text="${restaurant.restName}"></h2>
+                    <p th:text="'평점 : ' + ${restaurant.rating}"></p>
+                    <p th:text="${restaurant.cuisine} + ' · ' + ${restaurant.neighborhood} + ' · ' + ${restaurant.distance}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>test</h2>
+            <div class="fakeimg" style="height:100px;">Image</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a, faucibus pharetra odio. Maecenas quis nunc nibh.</p>
+        </div>
+        <div class="card">
+            <h3>test</h3>
+            <div class="fakeimg"><p>Image</p></div>
+            <div class="fakeimg"><p>Image</p></div>
+            <div class="fakeimg"><p>Image</p></div>
+        </div>
+        <div class="card">
+            <h3>test</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a, faucibus pharetra odio. Maecenas quis nunc nibh.</p>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+<script type="text/javascript">
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+    function showPosition(position) {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+        let geocoder = new kakao.maps.services.Geocoder();
+
+        geocoder.coord2Address(longitude, latitude, function (result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                let address = result[0].address.address_name;
+                document.getElementById("location").innerHTML = address + "";
+            } else {
+                document.getElementById("location").innerHTML = "주소를 찾을 수 없습니다.";
+            }
+        });
+    }
+</script>
+</body>
+</html>

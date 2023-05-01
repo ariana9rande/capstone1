@@ -1,0 +1,203 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+    padding: 30px;
+    text-align: center;
+    background: white;
+}
+
+.header h1 {
+    font-size: 50px;
+}
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    line-height: 21px;
+}
+
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav-item--selected
+{
+    background-color: gray;
+}
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+    float: left;
+    width: 75%;
+}
+
+/* 사이드 메뉴바 토글버튼*/
+.menubar-toggle-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.menubar-toggle-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    margin: 3px auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.menubar-toggle-btn.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.menubar-toggle-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menubar-toggle-btn.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Left Sidebar */
+.leftsidebar {
+    display: none;
+    float: left;
+    background-color: #f1f1f1;
+    padding-right: 20px;
+    height: 100vh;
+    width: 250px;
+}
+
+/* Right column */
+.rightcolumn {
+    float: left;
+    width: 25%;
+    background-color: #f1f1f1;
+    padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+
+    .topnav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        display: flex; /* Flexbox를 사용하여 링크들을 일렬로 배치합니다. */
+        justify-content: space-between; /* 링크들을 균등하게 배치합니다. */
+    }
+
+    .topnav a {
+        text-align: center;
+        flex: 1; /* 링크들이 동일한 너비를 가지도록 합니다. */
+    }
+}
+
+@media screen and (min-width: 769px)
+{
+    .topnav a img
+    {
+        width: 0px;
+        height: 0px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .leftsidebar {
+        z-index: 1;
+        position: absolute;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .leftsidebar {
+        z-index: 0;
+        position: relative;
+    }
+
+    .closebtn
+    {
+        display: none;
+    }
+
+    .menubar-toggle-btn {
+        display: none;
+    }
+
+    .leftcolumn {
+        width: calc(75% - 250px); /* leftsidebar의 너비를 뺀 나머지 영역을 leftcolumn이 차지하도록 함 */
+    }
+}
