@@ -1,7 +1,6 @@
 package hjh.capstone.controller;
 
 import hjh.capstone.domain.restaurant.Restaurant;
-import hjh.capstone.domain.restaurant.RestaurantRepositoryImpl;
 import hjh.capstone.service.RestaurantService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,18 +13,16 @@ import java.util.List;
 public class RestaurantController
 {
     private final RestaurantService restaurantService;
-    private final RestaurantRepositoryImpl restaurantRepositoryImpl;
 
-    public RestaurantController(RestaurantService restaurantService, RestaurantRepositoryImpl restaurantRepositoryImpl)
+    public RestaurantController(RestaurantService restaurantService)
     {
         this.restaurantService = restaurantService;
-        this.restaurantRepositoryImpl = restaurantRepositoryImpl;
     }
 
     @GetMapping("/")
     public String indexRestaurantList(Model model)
     {
-        List<Restaurant> restaurants = restaurantRepositoryImpl.findAll();
+        List<Restaurant> restaurants = restaurantService.findAll();
         model.addAttribute("restaurants", restaurants);
         return "index";
     }
@@ -39,7 +36,8 @@ public class RestaurantController
     }
 
     @GetMapping("/restaurants")
-    public String memberList(Model model) {
+    public String memberList(Model model)
+    {
         List<Restaurant> restaurants = restaurantService.findAll();
         model.addAttribute("restaurants", restaurants);
         return "restaurants";

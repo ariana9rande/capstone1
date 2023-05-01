@@ -43,20 +43,4 @@ public class Restaurant
         this.longitude = longitude;
         this.distance = distance;
     }
-
-    public Restaurant(Long restId, String restName, String neighborhood, String cuisine, Double rating, String image,
-                      Double latitude, Double longitude, Double distance)
-    {
-        this.restId = restId;
-        this.restName = restName;
-        this.neighborhood = neighborhood;
-        this.cuisine = cuisine;
-        this.rating = rating;
-        this.image = image;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.distance = distance;
-    }
-
-
 }
