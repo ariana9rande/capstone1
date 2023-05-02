@@ -28,8 +28,8 @@
 <div class="topnav">
 <!--    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>-->
 <!--    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>-->
-    <a class="topnav-item" th:classappend="${#httpServletRequest.requestURI == '/'} ? 'topnav-item--selected'"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>
-    <a class="topnav-item" th:classappend="${#httpServletRequest.requestURI == '/search'} ? 'topnav-item--selected'"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>
+    <a class="topnav-item" th:href="@{/}" th:classappend="${#httpServletRequest.requestURI == '/'} ? 'topnav-item--selected'"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>
+    <a class="topnav-item" th:href="@{/search}" th:classappend="${#httpServletRequest.requestURI == '/search'} ? 'topnav-item--selected'"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>
     <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>내 정보</a>
     <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>설정</a>
 </div>

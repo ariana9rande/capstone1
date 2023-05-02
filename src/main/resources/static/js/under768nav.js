@@ -42,11 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // }
     function handleResize() {
         if (window.innerWidth <= 768) {
-            const currentPageUrl = window.location.href.split('/').pop();
+            let currentPageUrl = '/' + window.location.href.split('/').pop();
             for (let i = 0; i < topnavItems.length; i++) {
                 const item = topnavItems[i];
                 const href = item.getAttribute('href');
-                if (href && href.split('/').pop() === currentPageUrl) {
+                // alert("item.getAttribute('href'): " + href);
+                // alert("currentPageUrl: " + currentPageUrl);
+                if (href === currentPageUrl) {
                     item.classList.add('topnav-item--selected');
                 } else {
                     item.classList.remove('topnav-item--selected');

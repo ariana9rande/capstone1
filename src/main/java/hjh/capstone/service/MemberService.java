@@ -25,11 +25,11 @@ public class MemberService
         return memberRepository.findById(memberId);
     }
 
-    public Long join(Member member)
+    public void join(Member member)
     {
         validateDuplicateMember(member);
         memberRepository.save(member);
-        return member.getMemberId();
+//        return member.getMemberId();
     }
 
     public void validateDuplicateMember(Member member)

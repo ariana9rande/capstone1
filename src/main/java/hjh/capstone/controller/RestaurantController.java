@@ -35,6 +35,14 @@ public class RestaurantController
         return "restaurant";
     }
 
+    @GetMapping("/{restId}/waiting")
+    public String waitPage(@PathVariable Long restId, Model model)
+    {
+        Restaurant restaurant = restaurantService.findRestaurant(restId);
+        model.addAttribute("restaurant", restaurant);
+        return "waiting";
+    }
+
     @GetMapping("/restaurants")
     public String memberList(Model model)
     {

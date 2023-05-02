@@ -50,6 +50,10 @@
                 </tbody>
             </table>
         </div>
+        <div class="card">
+            <button th:onclick="|location.href='@{/{restId}/waiting(restId=${restaurant.restId})}'|">줄서기</button>
+            <button>예약</button>
+        </div>
     </div>
     <div class="rightcolumn">
         <div class="card">

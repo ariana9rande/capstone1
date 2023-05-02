@@ -27,6 +27,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'com.h2database:h2'
+    implementation 'org.hibernate.validator:hibernate-validator:6.1.5.Final'
 }
 
 tasks.named('test') {
