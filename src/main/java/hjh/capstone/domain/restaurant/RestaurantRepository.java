@@ -16,5 +16,5 @@ public interface RestaurantRepository
 
     void deleteById(Long restId);
 
-    long count();
+
 }

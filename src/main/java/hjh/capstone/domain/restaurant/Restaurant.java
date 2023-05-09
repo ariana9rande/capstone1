@@ -1,6 +1,7 @@
 package hjh.capstone.domain.restaurant;
 
 import hjh.capstone.domain.restaurant.menu.Menu;
+import hjh.capstone.domain.wait.Wait;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,9 @@ public class Restaurant
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "rest_id")
     private List<Menu> menus;
+
+    @OneToMany(mappedBy = "restaurant", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Wait> waits;
 
     public Restaurant()
     {

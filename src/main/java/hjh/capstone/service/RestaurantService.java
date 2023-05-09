@@ -2,24 +2,19 @@ package hjh.capstone.service;
 
 import hjh.capstone.domain.restaurant.Restaurant;
 import hjh.capstone.domain.restaurant.RestaurantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class RestaurantService
 {
 
     private final RestaurantRepository restaurantRepository;
-
-    @Autowired
-    public RestaurantService(RestaurantRepository restaurantRepository)
-    {
-        this.restaurantRepository = restaurantRepository;
-    }
 
     public List<Restaurant> findAll()
     {
@@ -61,4 +56,6 @@ public class RestaurantService
     {
         restaurantRepository.deleteById(restId);
     }
+
+
 }

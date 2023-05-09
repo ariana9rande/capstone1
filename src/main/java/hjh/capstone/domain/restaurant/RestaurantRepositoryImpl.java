@@ -54,12 +54,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository
             em.remove(restaurant);
         }
     }
-
-    @Override
-    public long count()
-    {
-        return restaurantList.size();
-    }
 }
 
 

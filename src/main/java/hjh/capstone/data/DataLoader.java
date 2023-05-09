@@ -3,12 +3,15 @@ package hjh.capstone.data;
 import hjh.capstone.domain.restaurant.Restaurant;
 import hjh.capstone.domain.restaurant.RestaurantRepository;
 import hjh.capstone.domain.restaurant.menu.Menu;
+import hjh.capstone.domain.wait.Wait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,11 @@ public class DataLoader implements CommandLineRunner
         this.restaurantRepository = restaurantRepository;
         this.em = em;
     }
+
+    LocalDateTime now = LocalDateTime.now();
+    String formattedDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    LocalDateTime startTime = LocalDateTime.parse(formattedDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
 
     @Override
     @Transactional
@@ -46,6 +54,7 @@ public class DataLoader implements CommandLineRunner
             // 레스토랑 1
             Restaurant restaurant1 = new Restaurant("밥이랑", "강남", "한식", 4.5, "image1.jpg", 37.12345, 127.12345, 2.5);
             List<Menu> menus1 = new ArrayList<>();
+            List<Wait> waits1 = new ArrayList<>();
             menus1.add(new Menu("김치찌개", 8000, "image1-1.jpg", restaurant1));
             menus1.add(new Menu("된장찌개", 8000, "image1-2.jpg", restaurant1));
             menus1.add(new Menu("불고기", 12000, "image1-3.jpg", restaurant1));
@@ -53,6 +62,10 @@ public class DataLoader implements CommandLineRunner
             menus1.add(new Menu("김밥", 3000, "image1-5.jpg", restaurant1));
             restaurant1.setMenus(menus1);
             restaurantRepository.save(restaurant1);
+
+//            waits1.add(new Wait(1, startTime, restaurant1));
+//            restaurant1.setWaits(waits1);
+//            restaurantRepository.save(restaurant1);
 
             // 레스토랑 2
             Restaurant restaurant2 = new Restaurant("Pizza Heaven", "홍대", "양식", 4.0, "image2.jpg", 37.54321, 126.98765, 3.8);

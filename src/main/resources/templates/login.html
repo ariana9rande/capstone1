@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/style.css"/>
-    <title>로그인</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
+<div th:if="${loggedInMessage}">
+    <script th:inline="javascript">
+        alert("이미 로그인 중입니다.");
+        location.href = '/';
+    </script>
+</div>
+<div th:if="${loginMessage}">
+    <script th:inline="javascript">
+        alert("로그인 후 이용해주세요.");
+    </script>
+</div>
 <h1>로그인</h1>
-<form method="post" action="login">
+<form th:action="@{/login}" method="post">
     <label for="name">username:</label><br>
     <input type="text" id="name" name="name"><br>
     <label for="password">password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
+    <input type="password" id="password" name="password"><br>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <br>
     <input type="submit" value="로그인">
 </form>
 </body>
 </html>
+

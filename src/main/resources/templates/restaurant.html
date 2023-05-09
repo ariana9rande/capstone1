@@ -13,6 +13,14 @@
             <a th:href="@{/members/new}">회원가입</a>
             <a th:href="@{/login}">로그인</a>
             <a th:href="@{/members}">회원 목록</a>
+            <a th:href="@{/{restId}/waitlist(restId=${restaurant.restId})}">예약 목록</a>
+            <a th:href="@{/{restId}/manage(restId=${restaurant.restId})}">예약 관리</a>
+            <div style="float:right;">
+                <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
+                   th:text="${session.loginMember.memberName} + '님'"></a>
+                <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
+                   th:href="@{/logout}">로그아웃</a>
+            </div>
         </div>
     </a>
     <h1>식당 상세 정보</h1>
@@ -30,7 +38,7 @@
             <div class="container">
                 <h2 th:text="${restaurant.restName}"></h2>
                 <p th:text="'평점 : ' + ${restaurant.rating}"></p>
-                <p th:text="${restaurant.cuisine} + ' · ' + ${restaurant.neighborhood} + ' · ' + ${restaurant.distance}"></p>
+                <p th:text="${restaurant.cuisine} + ' · ' + ${restaurant.neighborhood} + ' · ' + ${restaurant.distance} + 'km'"></p>
             </div>
         </div>
         <div class="card">
@@ -51,7 +59,7 @@
             </table>
         </div>
         <div class="card">
-            <button th:onclick="|location.href='@{/{restId}/waiting(restId=${restaurant.restId})}'|">줄서기</button>
+            <button th:onclick="|location.href='@{/{restId}/waiting1(restId=${restaurant.restId})}'|">줄서기</button>
             <button>예약</button>
         </div>
     </div>

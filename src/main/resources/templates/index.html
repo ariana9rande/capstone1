@@ -15,8 +15,13 @@
         <a th:href="@{/login}">로그인</a>
         <a th:href="@{/members}">회원 목록</a>
         <a th:href="@{/restaurants}">식당 목록</a>
-        <p th:if="${session.loginMember != null and session.loginMember.memberName != null}"
-           th:text="${session.loginMember.memberName} + '님'" style="float:right;"></p>
+        <a th:href="@{/waitlist}">예약 목록</a>
+        <div style="float:right;">
+            <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
+               th:text="${session.loginMember.memberName} + '님'"></a>
+            <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
+               th:href="@{/logout}">로그아웃</a>
+        </div>
     </div>
     <div class="menubar-toggle-btn" onclick="toggleSidebar()">
         <span></span>
@@ -26,10 +31,14 @@
     <h1>Test</h1>
 </div>
 <div class="topnav">
-<!--    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>-->
-<!--    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>-->
-    <a class="topnav-item" th:href="@{/}" th:classappend="${#httpServletRequest.requestURI == '/'} ? 'topnav-item--selected'"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>
-    <a class="topnav-item" th:href="@{/search}" th:classappend="${#httpServletRequest.requestURI == '/search'} ? 'topnav-item--selected'"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>
+    <!--    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>-->
+    <!--    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>-->
+    <a class="topnav-item" th:href="@{/}"
+       th:classappend="${#httpServletRequest.requestURI == '/'} ? 'topnav-item--selected'"><img src=""
+                                                                                                style="width: 50px; height: 50px;"><br/>홈</a>
+    <a class="topnav-item" th:href="@{/search}"
+       th:classappend="${#httpServletRequest.requestURI == '/search'} ? 'topnav-item--selected'"><img src=""
+                                                                                                      style="width: 50px; height: 50px;"><br/>검색</a>
     <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>내 정보</a>
     <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>설정</a>
 </div>
@@ -37,7 +46,8 @@
     <div class="leftsidebar">
         <a href="#" class="closebtn" onclick='closeSidebar()'>x</a>
         <h2>Left Sidebar</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a, faucibus pharetra odio. Maecenas quis nunc nibh.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a,
+            faucibus pharetra odio. Maecenas quis nunc nibh.</p>
     </div>
     <div class="leftcolumn">
         <div class="card">
@@ -53,12 +63,12 @@
         </div>
         <div class="card" th:each="restaurant : ${restaurants}">
             <div class="card-body" style="display: flex;"
-                        th:onclick="|location.href='@{/{restId}(restId=${restaurant.restId})}'|">
+                 th:onclick="|location.href='@{/{restId}(restId=${restaurant.restId})}'|">
                 <img th:src="${restaurant.image}" style="width: 200px; height: 200px;">
                 <div style="display: flex; flex-direction: column; margin-left: 20px;">
                     <h2 th:text="${restaurant.restName}"></h2>
                     <p th:text="'평점 : ' + ${restaurant.rating}"></p>
-                    <p th:text="${restaurant.cuisine} + ' · ' + ${restaurant.neighborhood} + ' · ' + ${restaurant.distance}"></p>
+                    <p th:text="${restaurant.cuisine} + ' · ' + ${restaurant.neighborhood} + ' · ' + ${restaurant.distance} + 'km'"></p>
                 </div>
             </div>
         </div>
@@ -67,7 +77,8 @@
         <div class="card">
             <h2>test</h2>
             <div class="fakeimg" style="height:100px;">Image</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a, faucibus pharetra odio. Maecenas quis nunc nibh.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a,
+                faucibus pharetra odio. Maecenas quis nunc nibh.</p>
         </div>
         <div class="card">
             <h3>test</h3>
@@ -77,7 +88,8 @@
         </div>
         <div class="card">
             <h3>test</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a, faucibus pharetra odio. Maecenas quis nunc nibh.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse est odio, imperdiet eget erat a,
+                faucibus pharetra odio. Maecenas quis nunc nibh.</p>
         </div>
     </div>
 </div>

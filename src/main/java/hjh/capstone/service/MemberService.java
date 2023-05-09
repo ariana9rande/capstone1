@@ -2,6 +2,7 @@ package hjh.capstone.service;
 
 import hjh.capstone.domain.member.Member;
 import hjh.capstone.domain.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,22 +10,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MemberService
 {
 
     private final MemberRepository memberRepository;
-
-    public MemberService(MemberRepository memberRepository)
-    {
-        this.memberRepository = memberRepository;
-    }
 
     public Optional<Member> findMember(Long memberId)
     {
         return memberRepository.findById(memberId);
     }
 
+    @Transactional
     public void join(Member member)
     {
         validateDuplicateMember(member);
@@ -46,6 +44,7 @@ public class MemberService
         return memberRepository.findAll();
     }
 
+    @Transactional
     public void deleteMemberByName(String memberName)
     {
         memberRepository.deleteByName(memberName);

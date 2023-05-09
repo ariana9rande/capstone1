@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Member List</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Wait List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Wait Number / </th>
+        <th>Guest Name / </th>
+        <th th:if="${restId == null}">Restaurant Name / </th>
+        <th>Start Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="wait : ${waits}">
+        <td th:text="${wait.getWaitNumber()}"></td>
+        <td th:text="${wait.getMember().getMemberName()}"></td>
+        <td th:if="${restId == null}"
+            th:text="${wait.getRestaurant().getRestName()}"></td>
+        <td th:text="${wait.startTime}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

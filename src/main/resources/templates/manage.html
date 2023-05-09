@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script type="text/javascript"
+            th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=2d7b33c946deab659af266ae276ed039&libraries=services}"></script>
+</head>
+<body>
+<div class="header">
+    <h1>대기 목록</h1>
+</div>
+<div class="topnav">
+    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>
+    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>
+    <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>내 정보</a>
+    <a class="topnav-item" href="#"><img src="" style="width: 50px; height: 50px;"><br/>설정</a>
+</div>
+<div class="row">
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>대기 목록</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>대기 번호 / </th>
+                    <th>이름 / </th>
+                    <th>대기 시작 시간</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="wait : ${waits}">
+                    <td th:text="${wait.waitNumber}"></td>
+                    <td th:text="${wait.member.memberName}"></td>
+                    <td th:text="${wait.startTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+<!--        <div class="card">-->
+<!--            <button th:onclick="|location.href='@{/{restId}/waiting1(restId=${restaurant.restId})}'|">줄서기</button>-->
+<!--            <button>예약</button>-->
+<!--        </div>-->
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>위치</h2>
+            <div id="map" style="width:100%;height:400px;"></div>
+            <script>
+                var mapContainer = document.getElementById('map');
+                var options = {
+                    center: new kakao.maps.LatLng(${restaurant.latitude}, ${restaurant.longitude}),
+                    level: 3
+                };
+                var map = new kakao.maps.Map(mapContainer, options);
+                var markerPosition  = new kakao.maps.LatLng(${restaurant.latitude}, ${restaurant.longitude});
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+                marker.setMap(map);
+            </script>
+        </div>
+        <div class="card">
+            <h2>리뷰</h2>
+            <ul>
+                <!--<li th:each="review : ${restaurant.reviews}" th:text="${review.comment}"></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

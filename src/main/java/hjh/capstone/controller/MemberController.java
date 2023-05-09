@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -44,24 +45,32 @@ public class MemberController
     @GetMapping("/login")
     public String loginPage(HttpSession session, Model model)
     {
-        if(session.getAttribute("loginMember") != null)
+        if (session.getAttribute("loginMember") != null)
         {
-            model.addAttribute("message", "이미 로그인 중입니다.");
-            return "redirect:/";
+            model.addAttribute("loggedInMessage", "이미 로그인 중입니다.");
         }
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String name, @RequestParam String password, HttpSession session)
+    public String login(@RequestParam String name, @RequestParam String password, HttpSession session, Model model,
+                        HttpServletRequest request)
     {
         Member member = memberService.login(name, password);
         if (member == null)
         {
+            model.addAttribute("errorMessage", "아이디 또는 비밀번호가 올바르지 않습니다.");
             return "login";
         }
 
         session.setAttribute("loginMember", member);
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        session.invalidate(); // 세션 무효화
         return "redirect:/";
     }
 
