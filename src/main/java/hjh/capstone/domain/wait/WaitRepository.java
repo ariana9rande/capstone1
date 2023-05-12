@@ -24,7 +24,13 @@ public interface WaitRepository
 
     Wait createWait(Long restId, Long memberId);
 
-    long countWait(Long restId);
+    Long countWait(Long restId);
 
-    long calcWaitTime(Long restId);
+    Long calcWaitTime(Long restId);
+
+    void deleteById(Long id);
+
+    void deleteByRestId(Long restId);
+
+    void deleteAll();
 }

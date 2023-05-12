@@ -103,16 +103,45 @@ public class WaitRepositoryImpl implements WaitRepository
     }
 
     @Override
-    public long countWait(Long restId)
+    public Long countWait(Long restId)
     {
         Restaurant restaurant = em.find(Restaurant.class, restId);
         List<Wait> waits = restaurant.getWaits();
-        return waits != null ? waits.size() : 0;
+        return waits != null ? (long) waits.size() : 0;
     }
 
     @Override
-    public long calcWaitTime(Long restId)
+    public Long calcWaitTime(Long restId)
     {
         return countWait(restId) * 10;
+    }
+
+    @Override
+    public void deleteById(Long id)
+    {
+        Wait wait = em.find(Wait.class, id);
+        if (wait != null)
+        {
+            em.remove(wait);
+        }
+    }
+
+    @Override
+    public void deleteByRestId(Long restId)
+    {
+        List<Wait> waits = findByRestaurantIdOrderByStartTimeAsc(restId);
+        if (waits != null)
+        {
+            for (Wait wait : waits)
+            {
+                deleteById(wait.getId());
+            }
+        }
+    }
+
+    @Override
+    public void deleteAll()
+    {
+        em.createQuery("DELETE FROM Wait ").executeUpdate();
     }
 }

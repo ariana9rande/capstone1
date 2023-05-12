@@ -53,13 +53,32 @@ public class WaitService
         return waitRepository.save(wait);
     }
 
-    public long getWaitCount(Long restId)
+    public Long getWaitCount(Long restId)
     {
         return waitRepository.countWait(restId);
     }
 
-    public long getWaitTime(Long restId)
+    public Long getWaitTime(Long restId)
     {
         return waitRepository.calcWaitTime(restId);
     }
+
+    @Transactional
+    public void deleteWaitById(Long id)
+    {
+        waitRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteByRestId(Long restId)
+    {
+        waitRepository.deleteByRestId(restId);
+    }
+
+    @Transactional
+    public void deleteAllWaits()
+    {
+        waitRepository.deleteAll();
+    }
+
 }

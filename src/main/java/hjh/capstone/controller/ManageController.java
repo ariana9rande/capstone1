@@ -35,11 +35,27 @@ public class ManageController
         return "waitlist";
     }
 
+    //Delete 요청이 안 보내져서 임시로 GETMapping
+    @GetMapping("/{restId}/waitlist/deleteWaits")
+    public String deleteWaitsByRestId(@PathVariable Long restId)
+    {
+        waitService.deleteByRestId(restId);
+        return "redirect:/{restId}/waitlist?waitlist";
+    }
+
     @GetMapping("/waitlist")
     public String EntireWaitList(Model model)
     {
         List<Wait> waits = waitService.findAllWaits();
         model.addAttribute("waits", waits);
         return "waitlist";
+    }
+
+    //Delete 요청이 안 보내져서 임시로 GETMapping
+    @GetMapping("/waitlist/deleteWaits")
+    public String deleteWaits()
+    {
+        waitService.deleteAllWaits();
+        return "redirect:/waitlist";
     }
 }
