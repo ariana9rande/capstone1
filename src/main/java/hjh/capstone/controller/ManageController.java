@@ -22,7 +22,7 @@ public class ManageController
     @GetMapping("/{restId}/manage")
     public String manage(@PathVariable Long restId, Model model)
     {
-        List<Wait> waits =  waitService.WaitListOrderByStartTimeAsc(restId);
+        List<Wait> waits =  waitService.waitListOrderByStartTimeAsc(restId);
         model.addAttribute("waits", waits);
         return "manage";
     }
@@ -30,7 +30,7 @@ public class ManageController
     @GetMapping("/{restId}/waitlist")
     public String waitList(@PathVariable Long restId, Model model)
     {
-        List<Wait> waits =  waitService.WaitListOrderByStartTimeAsc(restId);
+        List<Wait> waits =  waitService.waitListOrderByStartTimeAsc(restId);
         model.addAttribute("waits", waits);
         return "waitlist";
     }
@@ -39,8 +39,20 @@ public class ManageController
     @GetMapping("/{restId}/waitlist/deleteWaits")
     public String deleteWaitsByRestId(@PathVariable Long restId)
     {
-        waitService.deleteByRestId(restId);
+        List<Wait> waits = waitService.waitListOrderByStartTimeAsc(restId);
+        if(waits.size() > 0)
+        {
+            waitService.deleteByRestId(restId);
+        }
         return "redirect:/{restId}/waitlist?waitlist";
+    }
+
+    //Delete 요청이 안 보내져서 임시로 GETMapping
+    @GetMapping("/{restId}/waitlist/{waitId}/delete")
+    public String deleteWait(@PathVariable Long restId, @PathVariable Long waitId)
+    {
+        waitService.deleteWaitById(waitId);
+        return "redirect:/{restId}/waitlist";
     }
 
     @GetMapping("/waitlist")
@@ -56,6 +68,14 @@ public class ManageController
     public String deleteWaits()
     {
         waitService.deleteAllWaits();
+        return "redirect:/waitlist";
+    }
+
+    //Delete 요청이 안 보내져서 임시로 GETMapping
+    @GetMapping("/waitlist/{waitId}/delete")
+    public String deleteWait(@PathVariable Long waitId)
+    {
+        waitService.deleteWaitById(waitId);
         return "redirect:/waitlist";
     }
 }

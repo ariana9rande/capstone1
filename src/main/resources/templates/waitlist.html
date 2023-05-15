@@ -16,7 +16,7 @@
         <th>Start Time</th>
         <th>
             <button th:text="'전체 삭제'"
-                    th:if="${#vars.restId && waits != null}" th:onclick="|location.href='@{/{restId}/waitlist/deleteWaits}'|"></button>
+                    th:if="${#vars.restId}" th:onclick="|location.href='@{/{restId}/waitlist/deleteWaits(restId=${#vars.restId})}'|"></button>
             <button th:text="'전체 삭제'"
                     th:unless="${#vars.restId}" th:onclick="|location.href='@{/waitlist/deleteWaits}'|"></button>
         </th>
@@ -30,7 +30,10 @@
             th:text="${wait.getRestaurant().getRestName()}"></td>
         <td th:text="${wait.startTime}"></td>
         <td>
-            <button th:text="삭제" th:if="${wait}" th:onclick="|location.href='@{/waitlist/{waitId}/delete(waitId=${wait.id})}'|"></button>
+            <button th:text="'삭제'"
+                    th:if="${#vars.restId}" th:onclick="|location.href='@{/{restId}/waitlist/{waitId}/delete(restId=${#vars.restId}, waitId=${wait.id})}'|"></button>
+            <button th:text="'삭제'"
+                    th:unless="${#vars.restId}" th:onclick="|location.href='@{/waitlist/{waitId}/delete(waitId=${wait.id})}'|"></button>
         </td>
     </tr>
     </tbody>

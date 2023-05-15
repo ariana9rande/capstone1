@@ -37,7 +37,7 @@ public class WaitService
         return waitRepository.calculateWaitTime(restaurant, startTime);
     }
 
-    public List<Wait> WaitListOrderByStartTimeAsc(Long restId)
+    public List<Wait> waitListOrderByStartTimeAsc(Long restId)
     {
         return waitRepository.findByRestaurantIdOrderByStartTimeAsc(restId);
     }
