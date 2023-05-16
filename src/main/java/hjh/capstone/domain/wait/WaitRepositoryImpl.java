@@ -144,4 +144,9 @@ public class WaitRepositoryImpl implements WaitRepository
     {
         em.createQuery("DELETE FROM Wait ").executeUpdate();
     }
+
+    @Override
+    public Wait findById(Long waitId) {
+        return em.find(Wait.class, waitId);
+    }
 }

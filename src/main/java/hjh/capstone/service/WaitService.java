@@ -81,4 +81,8 @@ public class WaitService
         waitRepository.deleteAll();
     }
 
+    public Wait findById(long waitId)
+    {
+        return waitRepository.findById(waitId);
+    }
 }
