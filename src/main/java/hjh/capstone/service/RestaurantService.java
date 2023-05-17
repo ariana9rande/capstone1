@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestaurantService
 {
-
     private final RestaurantRepository restaurantRepository;
 
     public List<Restaurant> findAll()

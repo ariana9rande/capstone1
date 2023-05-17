@@ -15,7 +15,7 @@
         <a th:href="@{/login}">로그인</a>
         <a th:href="@{/members}">회원 목록</a>
         <a th:href="@{/restaurants}">식당 목록</a>
-        <a th:href="@{/waitlist}">예약 목록</a>
+        <a th:href="@{/waitlist}">대기 목록</a>
         <div style="float:right;">
             <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
                th:text="${session.loginMember.memberName} + '님'"></a>

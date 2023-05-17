@@ -64,9 +64,9 @@ public class WaitService
     }
 
     @Transactional
-    public void deleteWaitById(Long id)
+    public void deleteWaitById(Long waitId)
     {
-        waitRepository.deleteById(id);
+        waitRepository.deleteById(waitId);
     }
 
     @Transactional

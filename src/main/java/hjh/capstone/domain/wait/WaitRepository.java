@@ -35,4 +35,6 @@ public interface WaitRepository
     void deleteAll();
 
     Wait findById(Long waitId);
+
+    void updateWaitNumber(Long restId);
 }

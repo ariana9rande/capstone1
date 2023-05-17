@@ -146,7 +146,21 @@ public class WaitRepositoryImpl implements WaitRepository
     }
 
     @Override
-    public Wait findById(Long waitId) {
+    public Wait findById(Long waitId)
+    {
         return em.find(Wait.class, waitId);
+    }
+
+    @Override
+    public void updateWaitNumber(Long restId)
+    {
+        List<Wait> waits = findByRestaurantIdOrderByStartTimeAsc(restId);
+
+        for (int i = 0; i < waits.size(); i++)
+        {
+            Wait wait = waits.get(i);
+            wait.setWaitNumber(i + 1);
+            save(wait);
+        }
     }
 }

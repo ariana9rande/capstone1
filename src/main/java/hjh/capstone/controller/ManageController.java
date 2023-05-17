@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,19 +55,18 @@ public class ManageController
         return "redirect:/{restId}/manage";
     }
 
-    @PostMapping("/{restId}/notice")
-    public String notice(@PathVariable Long restId, @RequestParam Long waitId, Model model)
-    {
+    @GetMapping("/{restId}/notice")
+    public String notice(@PathVariable Long restId, @RequestParam Long waitId, RedirectAttributes redirectAttributes) {
         Wait wait = waitService.findById(waitId);
         Optional<Member> member = memberService.findMember(wait.getMember().getMemberId());
 
+        // 알림 전송 로직 추가 필요
 
+        redirectAttributes.addAttribute("check", true);
+        redirectAttributes.addAttribute("notificationSent", true);
+        redirectAttributes.addAttribute("notificationSentTime", LocalDateTime.now());
 
-        model.addAttribute("notificationSent", true);
-        model.addAttribute("notificationSentTime", LocalDateTime.now());
-        model.addAttribute("check", true);
-
-        return "redirect:/{restId}/manage";
+        return "redirect:/" + restId + "/manage?check={check}&notificationSent={notificationSent}&notificationSentTime={notificationSentTime}";
     }
 
     @GetMapping("/{restId}/waitlist")

@@ -14,7 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberService
 {
-
     private final MemberRepository memberRepository;
 
     public Optional<Member> findMember(Long memberId)
