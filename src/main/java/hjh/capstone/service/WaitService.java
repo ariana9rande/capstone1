@@ -1,13 +1,11 @@
 package hjh.capstone.service;
 
-import hjh.capstone.domain.restaurant.Restaurant;
 import hjh.capstone.domain.wait.Wait;
 import hjh.capstone.domain.wait.WaitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,21 +18,6 @@ public class WaitService
     public List<Wait> findAllWaits()
     {
         return waitRepository.findAll();
-    }
-
-    public List<Object[]> countAllByRestaurantAndMemberIsNull()
-    {
-        return waitRepository.countAllByRestaurantAndMemberIsNull();
-    }
-
-    public int countByRestaurantAndMemberIsNull(Restaurant restaurant)
-    {
-        return waitRepository.countByRestaurantAndMemberIsNull(restaurant);
-    }
-
-    public int getWaitTime(Restaurant restaurant, LocalDateTime startTime)
-    {
-        return waitRepository.calculateWaitTime(restaurant, startTime);
     }
 
     public List<Wait> waitListOrderByStartTimeAsc(Long restId)

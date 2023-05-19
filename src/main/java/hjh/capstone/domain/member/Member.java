@@ -17,6 +17,7 @@ public class Member
     private String memberName;
     private String email;
     private String password;
+    private boolean isWaiting;
 
     @OneToMany(mappedBy = "member")
     private List<Wait> waits = new ArrayList<>();
@@ -30,5 +31,15 @@ public class Member
 
     public Member()
     {
+    }
+
+    public boolean getIsWaiting()
+    {
+        return isWaiting;
+    }
+
+    public void setIsWaiting(boolean isWaiting)
+    {
+        this.isWaiting = isWaiting;
     }
 }

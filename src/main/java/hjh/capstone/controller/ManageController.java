@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ManageController
@@ -58,7 +57,7 @@ public class ManageController
     @GetMapping("/{restId}/notice")
     public String notice(@PathVariable Long restId, @RequestParam Long waitId, RedirectAttributes redirectAttributes) {
         Wait wait = waitService.findById(waitId);
-        Optional<Member> member = memberService.findMember(wait.getMember().getMemberId());
+        Member member = memberService.findMemberById(wait.getMember().getMemberId());
 
         // 알림 전송 로직 추가 필요
 

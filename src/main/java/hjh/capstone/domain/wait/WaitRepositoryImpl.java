@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class WaitRepositoryImpl implements WaitRepository
@@ -26,15 +25,6 @@ public class WaitRepositoryImpl implements WaitRepository
         this.em = em;
         this.restaurantService = restaurantService;
         this.memberService = memberService;
-    }
-
-    @Override
-    public List<Object[]> countAllByRestaurantAndMemberIsNull()
-    {
-        return em.createQuery(
-                        "select w.restaurant.id, count(w) from Wait w where w.member is null group by w.restaurant.id",
-                        Object[].class)
-                .getResultList();
     }
 
     @Override
@@ -55,15 +45,21 @@ public class WaitRepositoryImpl implements WaitRepository
 
     public Wait createWait(Long restId, Long memberId)
     {
+        Member member = memberService.findMemberById(memberId);
+        if(member.getIsWaiting())
+        {
+
+        }
         List<Wait> waits = findByRestaurantIdOrderByStartTimeAsc(restId);
         Restaurant restaurant = restaurantService.findRestaurant(restId);
-        Optional<Member> member = memberService.findMember(memberId);
+
         int waitNumber = waits.isEmpty() ? 1 : waits.get(waits.size() - 1).getWaitNumber() + 1;
         LocalDateTime now = LocalDateTime.now();
         String formattedDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         LocalDateTime startTime = LocalDateTime.parse(formattedDateTime,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Wait wait = new Wait(waitNumber, startTime, restaurant, member.orElse(null));
+        Wait wait = new Wait(waitNumber, startTime, restaurant, member);
+        member.setIsWaiting(true);
         save(wait);
         return wait;
     }
@@ -73,16 +69,6 @@ public class WaitRepositoryImpl implements WaitRepository
     {
         em.persist(wait);
         return wait;
-    }
-
-    @Override
-    public int countByRestaurantAndMemberIsNull(Restaurant restaurant)
-    {
-        return em.createQuery("select count(w) from Wait w where w.restaurant = :restaurant and w.member is null",
-                        Long.class)
-                .setParameter("restaurant", restaurant)
-                .getSingleResult()
-                .intValue();
     }
 
     @Override
@@ -122,6 +108,7 @@ public class WaitRepositoryImpl implements WaitRepository
         Wait wait = em.find(Wait.class, id);
         if (wait != null)
         {
+            wait.getMember().setWaiting(false);
             em.remove(wait);
         }
     }
@@ -134,6 +121,7 @@ public class WaitRepositoryImpl implements WaitRepository
         {
             for (Wait wait : waits)
             {
+                wait.getMember().setWaiting(false);
                 deleteById(wait.getId());
             }
         }
@@ -149,18 +137,5 @@ public class WaitRepositoryImpl implements WaitRepository
     public Wait findById(Long waitId)
     {
         return em.find(Wait.class, waitId);
-    }
-
-    @Override
-    public void updateWaitNumber(Long restId)
-    {
-        List<Wait> waits = findByRestaurantIdOrderByStartTimeAsc(restId);
-
-        for (int i = 0; i < waits.size(); i++)
-        {
-            Wait wait = waits.get(i);
-            wait.setWaitNumber(i + 1);
-            save(wait);
-        }
     }
 }

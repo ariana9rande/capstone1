@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository
@@ -21,25 +20,25 @@ public class MemberRepositoryImpl implements MemberRepository
     }
 
     @Override
-    public Optional<Member> findById(Long memberId)
+    public Member findById(Long memberId)
     {
-        if (memberId == null) {
-            return Optional.empty();
+        if (memberId == null)
+        {
+            return null;
         }
-        Member member = em.find(Member.class, memberId);
-        return Optional.ofNullable(member);
+        return em.find(Member.class, memberId);
     }
 
     @Override
-    public Optional<Member> findByName(String memberName)
+    public Member findByName(String memberName)
     {
         if (memberName == null)
         {
-            return Optional.empty();
+            return null;
         }
-        Member member = em.find(Member.class, memberName);
-        return Optional.ofNullable(member);
+        return em.find(Member.class, memberName);
     }
+
 
     @Override
     public List<Member> findAll()
@@ -61,7 +60,8 @@ public class MemberRepositoryImpl implements MemberRepository
     @Override
     public Member findByNameAndPassword(String memberName, String password)
     {
-        return em.createQuery("select m from Member m where m.memberName = :memberName and m.password = :password", Member.class)
+        return em.createQuery("select m from Member m where m.memberName = :memberName and m.password = :password",
+                        Member.class)
                 .setParameter("memberName", memberName)
                 .setParameter("password", password)
                 .getResultList()
