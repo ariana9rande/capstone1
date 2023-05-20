@@ -1,6 +1,7 @@
 package hjh.capstone.domain.wait;
 
 import hjh.capstone.domain.member.Member;
+import hjh.capstone.domain.member.MemberRepository;
 import hjh.capstone.domain.restaurant.Restaurant;
 import hjh.capstone.service.MemberService;
 import hjh.capstone.service.RestaurantService;
@@ -18,13 +19,15 @@ public class WaitRepositoryImpl implements WaitRepository
     private final EntityManager em;
     private final RestaurantService restaurantService;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public WaitRepositoryImpl(EntityManager em, RestaurantService restaurantService, MemberService memberService)
+    public WaitRepositoryImpl(EntityManager em, RestaurantService restaurantService, MemberService memberService, MemberRepository memberRepository)
     {
         this.em = em;
         this.restaurantService = restaurantService;
         this.memberService = memberService;
+        this.memberRepository = memberRepository;
     }
 
     @Override
@@ -48,19 +51,22 @@ public class WaitRepositoryImpl implements WaitRepository
         Member member = memberService.findMemberById(memberId);
         if(member.getIsWaiting())
         {
-
+            throw new IllegalStateException("이미 대기 중인 회원입니다.");
         }
         List<Wait> waits = findByRestaurantIdOrderByStartTimeAsc(restId);
         Restaurant restaurant = restaurantService.findRestaurant(restId);
 
         int waitNumber = waits.isEmpty() ? 1 : waits.get(waits.size() - 1).getWaitNumber() + 1;
+
         LocalDateTime now = LocalDateTime.now();
         String formattedDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         LocalDateTime startTime = LocalDateTime.parse(formattedDateTime,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
         Wait wait = new Wait(waitNumber, startTime, restaurant, member);
         member.setIsWaiting(true);
         save(wait);
+
         return wait;
     }
 
@@ -108,7 +114,7 @@ public class WaitRepositoryImpl implements WaitRepository
         Wait wait = em.find(Wait.class, id);
         if (wait != null)
         {
-            wait.getMember().setWaiting(false);
+            wait.getMember().setIsWaiting(false);
             em.remove(wait);
         }
     }
@@ -121,7 +127,7 @@ public class WaitRepositoryImpl implements WaitRepository
         {
             for (Wait wait : waits)
             {
-                wait.getMember().setWaiting(false);
+                wait.getMember().setIsWaiting(false);
                 deleteById(wait.getId());
             }
         }

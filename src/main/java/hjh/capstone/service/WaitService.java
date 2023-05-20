@@ -25,6 +25,7 @@ public class WaitService
         return waitRepository.findByRestaurantIdOrderByStartTimeAsc(restId);
     }
 
+    @Transactional
     public Wait createNewWait(Long restId, Long memberId)
     {
         return waitRepository.createWait(restId, memberId);
