@@ -6,7 +6,7 @@ import com.google.firebase.messaging.Notification;
 public class FCMNotification
 {
 
-    public static Message createNotificationMessage(String title, String body, String token)
+    public static Message createNotificationMessage(String token, String title, String body)
     {
         Notification notification = Notification.builder()
                 .setTitle(title)

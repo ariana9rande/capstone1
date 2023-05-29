@@ -71,7 +71,7 @@ public class ManageController
     @GetMapping("/{restId}/waitlist")
     public String waitList(@PathVariable Long restId, Model model)
     {
-        List<Wait> waits =  waitService.waitListOrderByStartTimeAsc(restId);
+        List<Wait> waits = waitService.waitListOrderByStartTimeAsc(restId);
         model.addAttribute("waits", waits);
         return "waitlist";
     }

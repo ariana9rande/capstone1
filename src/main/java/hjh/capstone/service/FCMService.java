@@ -9,10 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class FCMService
 {
-    public void sendNotification(String title, String body, String token) throws FirebaseMessagingException
+    public void sendNotification(String token, String title, String body)
     {
-        Message message = FCMNotification.createNotificationMessage(title, body, token);
-        String messageId = FirebaseMessaging.getInstance().send(message);
-        System.out.println("Successfully sent message: " + messageId);
+        try
+        {
+            Message message = FCMNotification.createNotificationMessage(token, title, body);
+            String messageId = FirebaseMessaging.getInstance().send(message);
+            System.out.println("Successfully sent message: " + messageId);
+        }
+        catch (FirebaseMessagingException e)
+        {
+            System.err.println("Failed to send message: " + e.getMessage());
+        }
     }
 }
