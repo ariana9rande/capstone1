@@ -18,6 +18,7 @@ public class Member
     private String email;
     private String password;
     private boolean isWaiting;
+    private String token;
 
     @OneToMany(mappedBy = "member")
     private List<Wait> waits = new ArrayList<>();

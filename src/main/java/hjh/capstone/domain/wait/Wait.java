@@ -28,6 +28,8 @@ public class Wait
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private boolean isEntered;
+
     public Wait(int waitNumber, LocalDateTime startTime, Restaurant restaurant, Member member)
     {
         this.waitNumber = waitNumber;

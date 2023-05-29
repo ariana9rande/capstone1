@@ -69,4 +69,14 @@ public class MemberRepositoryImpl implements MemberRepository
                 .findFirst()
                 .orElse(null);
     }
+
+    public void update(Member member)
+    {
+        em.merge(member);
+    }
+
+    public String generateToken(Long memberId)
+    {
+        return "member_" + memberId;
+    }
 }

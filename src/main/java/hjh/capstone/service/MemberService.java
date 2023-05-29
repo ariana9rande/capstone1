@@ -51,4 +51,17 @@ public class MemberService
     {
         return memberRepository.findByNameAndPassword(memberName, password);
     }
+
+    @Transactional
+    public void updateToken(Long memberId, String token)
+    {
+        Member member = findMemberById(memberId);
+        member.setToken(token);
+        memberRepository.update(member);
+    }
+
+    public String generateNewToken(Long memberId)
+    {
+        return memberRepository.generateToken(memberId);
+    }
 }
