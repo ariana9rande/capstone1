@@ -22,4 +22,8 @@ public interface MemberRepository
     void update(Member member);
 
     String generateToken(Long memberId);
+
+    boolean verifyToken(String token);
+
+    String generateValidToken();
 }

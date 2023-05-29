@@ -64,4 +64,9 @@ public class MemberService
     {
         return memberRepository.generateToken(memberId);
     }
+
+    public boolean verifyFCMToken(String token)
+    {
+        return memberRepository.verifyToken(token);
+    }
 }
