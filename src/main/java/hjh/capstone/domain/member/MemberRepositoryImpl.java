@@ -113,5 +113,18 @@ public class MemberRepositoryImpl implements MemberRepository
         }
     }
 
-    public
+    public String generateValidToken(Long memberId)
+    {
+        int i = 0;
+        String token = generateToken(memberId);
+
+        while(!verifyToken(token) && i < 10)
+        {
+            System.out.println("MemberRepository.generateValidToken : 유효하지 않은 token -> 재생성");
+            token = generateToken(memberId);
+            i++;
+        }
+
+        return token;
+    }
 }

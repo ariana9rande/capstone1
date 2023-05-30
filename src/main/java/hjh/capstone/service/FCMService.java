@@ -20,7 +20,7 @@ public class FCMService
     {
         if(!memberService.verifyFCMToken(token))
         {
-            System.out.println("유효하지 않은 FCM token");
+            System.out.println("FCMService.sendNotification : 유효하지 않은 FCM token");
             return;
         }
 

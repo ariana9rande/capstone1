@@ -7,7 +7,7 @@
     <script type="text/javascript"
             th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=2d7b33c946deab659af266ae276ed039&libraries=services}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!--    <script th:src="@{/js/sendPushNotification.js}"></script>-->
+    <script th:src="@{/js/service-worker.js}"></script>
 </head>
 <body>
 <div class="header">
@@ -82,6 +82,34 @@
                     position: markerPosition
                 });
                 marker.setMap(map);
+
+                const sendNotificationButton = document.getElementById('send-notification-button');
+                sendNotificationButton.addEventListener('click', handleSendNotification);
+
+                // 알림 권한 요청 함수
+                function requestNotificationPermission() {
+                    return new Promise((resolve, reject) => {
+                        if (!('Notification' in window)) {
+                            reject('브라우저에서 알림을 지원하지 않습니다.');
+                        } else if (Notification.permission === 'granted') {
+                            resolve();
+                        } else if (Notification.permission !== 'denied') {
+                            Notification.requestPermission()
+                                .then((permission) => {
+                                    if (permission === 'granted') {
+                                        resolve();
+                                    } else {
+                                        reject('알림 권한이 거부되었습니다.');
+                                    }
+                                })
+                                .catch((error) => {
+                                    reject('알림 권한 요청에 실패했습니다.');
+                                });
+                        } else {
+                            reject('알림 권한이 거부되었습니다.');
+                        }
+                    });
+                }
             </script>
         </div>
         <div class="card">

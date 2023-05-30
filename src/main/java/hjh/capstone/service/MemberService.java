@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,7 +36,6 @@ public class MemberService
         }
     }
 
-
     public List<Member> findMembers()
     {
         return memberRepository.findAll();
@@ -62,7 +62,9 @@ public class MemberService
 
     public String generateNewToken(Long memberId)
     {
-        return memberRepository.generateToken(memberId);
+        String uniqueId = UUID.randomUUID().toString();
+
+        return "" + memberId + uniqueId;
     }
 
     public boolean verifyFCMToken(String token)

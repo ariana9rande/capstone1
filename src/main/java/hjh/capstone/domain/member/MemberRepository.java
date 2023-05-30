@@ -25,5 +25,5 @@ public interface MemberRepository
 
     boolean verifyToken(String token);
 
-    String generateValidToken();
+    String generateValidToken(Long memberId);
 }
