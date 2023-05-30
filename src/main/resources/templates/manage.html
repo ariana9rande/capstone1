@@ -41,8 +41,11 @@
                     <td th:text="${wait.member.memberName}"></td>
                     <td th:text="${wait.startTime}"></td>
                     <td>
-                        <button th:text="'알림 전송'"
-                                th:onclick="|location.href='@{/{restId}/notice(restId=${#vars.restId}, waitId=${wait.id})}'|"></button>
+<!--                        <button id="send-notification-button" th:text="'알림 전송'"-->
+<!--                                th:onclick="|location.href='@{/{restId}/notice(restId=${#vars.restId}, waitId=${wait.id})}'|"></button>-->
+                        <button th:onclick="|handleSendNotification('${restId}', '${wait.id}')|">알림 전송</button>
+
+
                     </td>
                     <td>
                         <button th:text="'삭제'"
@@ -71,20 +74,35 @@
             <h2>위치</h2>
             <div id="map" style="width:100%;height:400px;"></div>
             <script>
-                var mapContainer = document.getElementById('map');
-                var options = {
-                    center: new kakao.maps.LatLng(${restaurant.latitude}, ${restaurant.longitude}),
-                    level: 3
-                };
-                var map = new kakao.maps.Map(mapContainer, options);
-                var markerPosition  = new kakao.maps.LatLng(${restaurant.latitude}, ${restaurant.longitude});
-                var marker = new kakao.maps.Marker({
-                    position: markerPosition
-                });
-                marker.setMap(map);
+                // const sendNotificationButton = document.getElementById('send-notification-button');
+                // sendNotificationButton.addEventListener('click', handleSendNotification);
 
-                const sendNotificationButton = document.getElementById('send-notification-button');
-                sendNotificationButton.addEventListener('click', handleSendNotification);
+                function handleSendNotification(restId, waitId) {
+                    alert("handleSendNotification 호출");
+                    requestNotificationPermission()
+                        .then(() => {
+                            fetch(`/${restId}/notice?waitId=${waitId}`, {
+                                method: 'POST'
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        // 알림 전송 성공한 경우 처리
+                                        alert("전송 성공");
+                                    } else {
+                                        // 알림 전송 실패한 경우 처리
+                                        alert("전송 실패");
+                                    }
+                                })
+                                .catch(error => {
+                                    // 에러 처리
+                                    alert("오류 발생");
+                                });
+                        })
+                        .catch(error => {
+                            // 알림 권한 거부 또는 실패 처리
+                            alert("알림 권한 처리 오류 발생");
+                        });
+                }
 
                 // 알림 권한 요청 함수
                 function requestNotificationPermission() {
@@ -97,6 +115,7 @@
                             Notification.requestPermission()
                                 .then((permission) => {
                                     if (permission === 'granted') {
+                                        alert("알림 권한 허용됨");
                                         resolve();
                                     } else {
                                         reject('알림 권한이 거부되었습니다.');
@@ -110,6 +129,7 @@
                         }
                     });
                 }
+
             </script>
         </div>
         <div class="card">

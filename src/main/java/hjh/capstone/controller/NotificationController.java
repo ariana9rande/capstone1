@@ -6,9 +6,8 @@ import hjh.capstone.domain.wait.Wait;
 import hjh.capstone.service.WaitService;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -23,23 +22,58 @@ public class NotificationController
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    @GetMapping("/{restId}/notice")
-    public String sendNotification(@PathVariable Long restId, @RequestParam Long waitId, @RequestBody Notification notification)
+//    @GetMapping("/{restId}/notice")
+//    public String sendNotification(@PathVariable Long restId, @RequestParam Long waitId)
+//    {
+//        Wait wait = waitService.findById(waitId);
+//        Member member = wait.getMember();
+//
+//        String title = "입장 안내";
+//        String body = "대기번호 " + wait.getWaitNumber() + "번 입장 5분 전입니다.";
+//        String icon = "/images/favicon.ico";
+//
+//        Notification notification = new Notification(title, body, icon);
+//
+//        simpMessagingTemplate.convertAndSendToUser(member.getMemberId().toString(), "/queue/notifications", notification);
+////        fcmService.sendNotification(member.getToken(), title, body);
+////        System.out.println("NotificationController : fcmService.sendNotification 호출 완료");
+//
+//        return "redirect:/" + restId + "/manage";
+//    }
+
+    @PostMapping("/{restId}/notice")
+    public String sendNotification(@PathVariable Long restId, @RequestParam Long waitId)
     {
         Wait wait = waitService.findById(waitId);
         Member member = wait.getMember();
 
+        System.out.println("postMapping 완료");
+
         String title = "입장 안내";
         String body = "대기번호 " + wait.getWaitNumber() + "번 입장 5분 전입니다.";
+        String icon = "/images/favicon.ico";
 
-        notification.setTitle(title);
-        notification.setBody(body);
+        Notification notification = new Notification(title, body, icon);
 
-        simpMessagingTemplate.convertAndSendToUser(member.getMemberId().toString(), "/queue/notifications", notification);
-//        fcmService.sendNotification(member.getToken(), title, body);
-//        System.out.println("NotificationController : fcmService.sendNotification 호출 완료");
+        try
+        {
+            // 알림을 전송할 대상 지정
+            String recipientId = String.valueOf(member.getMemberId()); // 사용자 ID 또는 고유 식별자
+
+            // 알림을 생성하고 사용자에게 전송
+
+            // 알림 전송 성공한 경우 처리
+            System.out.println("알림 전송 성공");
+        }
+        catch (Exception e)
+        {
+            // 알림 전송 실패한 경우 처리
+            System.out.println("알림 전송 실패");
+            e.printStackTrace();
+        }
 
         return "redirect:/" + restId + "/manage";
     }
+
 
 }

@@ -1,19 +1,23 @@
 package hjh.capstone.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 @Configuration
 public class WebSocketConfig
 {
-    @Autowired
-    private WebSocketMessageChannel webSocketMessageChannel;
+    @Bean
+    public SimpMessagingTemplate messagingTemplate()
+    {
+        return new SimpMessagingTemplate(clientOutboundChannel());
+    }
 
     @Bean
-    public SimpMessagingTemplate simpMessagingTemplate()
+    public MessageChannel clientOutboundChannel()
     {
-        return new SimpMessagingTemplate(webSocketMessageChannel);
+        return new DirectChannel();
     }
 }

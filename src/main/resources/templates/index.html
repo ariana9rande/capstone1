@@ -142,10 +142,10 @@
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('/service-worker.js')
                 .then(function(registration) {
-                    console.log('Service Worker 등록 성공:', registration);
+                    alert('Service Worker 등록 성공:');
                 })
                 .catch(function(error) {
-                    console.log('Service Worker 등록 실패:', error);
+                    alert('Service Worker 등록 실패:');
                 });
         });
     }

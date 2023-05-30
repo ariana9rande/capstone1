@@ -14,7 +14,7 @@ self.addEventListener('push', function(event) {
                     icon: icon,
                     // 추가적인 옵션 설정 가능
                 };
-
+                alert(data);
                 return self.registration.showNotification(title, options);
             })
     );
