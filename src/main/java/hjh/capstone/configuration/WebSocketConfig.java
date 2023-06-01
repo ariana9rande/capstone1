@@ -1,23 +1,27 @@
 package hjh.capstone.configuration;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.integration.channel.DirectChannel;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration
-public class WebSocketConfig
+@EnableWebSocketMessageBroker
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer
 {
-    @Bean
-    public SimpMessagingTemplate messagingTemplate()
-    {
-        return new SimpMessagingTemplate(clientOutboundChannel());
+
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        // WebSocket 엔드포인트 등록
+        registry.addEndpoint("/ws").withSockJS();
     }
 
-    @Bean
-    public MessageChannel clientOutboundChannel()
-    {
-        return new DirectChannel();
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        // 메시지 브로커 구성
+        registry.enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/app");
     }
 }
+

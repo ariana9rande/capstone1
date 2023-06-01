@@ -55,25 +55,9 @@ public class NotificationController
 
         Notification notification = new Notification(title, body, icon);
 
-        try
-        {
-            // 알림을 전송할 대상 지정
-            String recipientId = String.valueOf(member.getMemberId()); // 사용자 ID 또는 고유 식별자
-
-            // 알림을 생성하고 사용자에게 전송
-
-            // 알림 전송 성공한 경우 처리
-            System.out.println("알림 전송 성공");
-        }
-        catch (Exception e)
-        {
-            // 알림 전송 실패한 경우 처리
-            System.out.println("알림 전송 실패");
-            e.printStackTrace();
-        }
+        simpMessagingTemplate.convertAndSendToUser(String.valueOf(member.getMemberId()), "/queue/notifications", notification);
 
         return "redirect:/" + restId + "/manage";
     }
-
 
 }

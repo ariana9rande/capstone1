@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<!--    <script type="module">-->
-<!--        // Import the functions you need from the SDKs you need-->
-<!--        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";-->
-<!--        // TODO: Add SDKs for Firebase products that you want to use-->
-<!--        // https://firebase.google.com/docs/web/setup#available-libraries-->
-
-<!--        // Your web app's Firebase configuration-->
-<!--        const firebaseConfig = {-->
-<!--            apiKey: "AIzaSyCVKICbloXtfYVX1R4APZnQAbDiQa-332w",-->
-<!--            authDomain: "capstone-4159e.firebaseapp.com",-->
-<!--            projectId: "capstone-4159e",-->
-<!--            storageBucket: "capstone-4159e.appspot.com",-->
-<!--            messagingSenderId: "621118835015",-->
-<!--            appId: "1:621118835015:web:25935a7efa827ddec76462"-->
-<!--        };-->
-<!--        // Initialize Firebase-->
-<!--        const app = initializeApp(firebaseConfig);-->
-<!--    </script>-->
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -27,6 +9,7 @@
     <script th:src="@{/js/under768nav.js}"></script>
     <script th:src="@{/js/sidebar.js}"></script>
     <script th:src="@{/js/service-worker.js}"></script>
+    <script th:src="@{/js/websocket-client.js}"></script>
 </head>
 <body>
 <div class="header">
@@ -126,21 +109,11 @@
     function showPosition(position) {
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
-        let geocoder = new kakao.maps.services.Geocoder();
-
-        geocoder.coord2Address(longitude, latitude, function (result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                let address = result[0].address.address_name;
-                document.getElementById("location").innerHTML = address + "";
-            } else {
-                document.getElementById("location").innerHTML = "주소를 찾을 수 없습니다.";
-            }
-        });
     }
 
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js')
+            navigator.serviceWorker.register('/js/service-worker.js')
                 .then(function(registration) {
                     alert('Service Worker 등록 성공:');
                 })
