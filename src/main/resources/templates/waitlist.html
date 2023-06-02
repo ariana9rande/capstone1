@@ -1,43 +1,43 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Member List</title>
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
-<body>
-<h1>Wait List</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Wait Number / </th>
-        <th>Guest Name / </th>
-        <th th:if="${restId == null}">Restaurant Name / </th>
-        <th>Start Time</th>
-        <th>
-            <button th:text="'전체 삭제'"
-                    th:if="${#vars.restId}" th:onclick="|location.href='@{/{restId}/waitlist/deleteWaits(restId=${#vars.restId})}'|"></button>
-            <button th:text="'전체 삭제'"
-                    th:unless="${#vars.restId}" th:onclick="|location.href='@{/waitlist/deleteWaits}'|"></button>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="wait : ${waits}">
-        <td th:text="${wait.getWaitNumber()}"></td>
-        <td th:text="${wait.getMember().getMemberName()}"></td>
-        <td th:if="${restId == null}"
-            th:text="${wait.getRestaurant().getRestName()}"></td>
-        <td th:text="${wait.startTime}"></td>
-        <td>
-            <button th:text="'삭제'"
-                    th:if="${#vars.restId}" th:onclick="|location.href='@{/{restId}/waitlist/{waitId}/delete(restId=${#vars.restId}, waitId=${wait.id})}'|"></button>
-            <button th:text="'삭제'"
-                    th:unless="${#vars.restId}" th:onclick="|location.href='@{/waitlist/{waitId}/delete(waitId=${wait.id})}'|"></button>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Member List</title>-->
+<!--    <link rel="shortcut icon" href="/images/favicon.ico">-->
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}"/>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Wait List</h1>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Wait Number / </th>-->
+<!--        <th>Guest Name / </th>-->
+<!--        <th th:if="${restId == null}">Restaurant Name / </th>-->
+<!--        <th>Start Time</th>-->
+<!--        <th>-->
+<!--            <button th:text="'전체 삭제'"-->
+<!--                    th:if="${#vars.restId}" th:onclick="|location.href='@{/{restId}/waitlist/deleteWaits(restId=${#vars.restId})}'|"></button>-->
+<!--            <button th:text="'전체 삭제'"-->
+<!--                    th:unless="${#vars.restId}" th:onclick="|location.href='@{/waitlist/deleteWaits}'|"></button>-->
+<!--        </th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="wait : ${waits}">-->
+<!--        <td th:text="${wait.getWaitNumber()}"></td>-->
+<!--        <td th:text="${wait.getMember().getMemberName()}"></td>-->
+<!--        <td th:if="${restId == null}"-->
+<!--            th:text="${wait.getRestaurant().getRestName()}"></td>-->
+<!--        <td th:text="${wait.startTime}"></td>-->
+<!--        <td>-->
+<!--            <button th:text="'삭제'"-->
+<!--                    th:if="${#vars.restId}" th:onclick="|location.href='@{/{restId}/waitlist/{waitId}/delete(restId=${#vars.restId}, waitId=${wait.id})}'|"></button>-->
+<!--            <button th:text="'삭제'"-->
+<!--                    th:unless="${#vars.restId}" th:onclick="|location.href='@{/waitlist/{waitId}/delete(waitId=${wait.id})}'|"></button>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->

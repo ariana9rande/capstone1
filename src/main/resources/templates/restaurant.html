@@ -14,8 +14,8 @@
         <div>
             <a th:href="@{/members/new}">회원가입</a>
             <a th:href="@{/login}">로그인</a>
-            <a th:href="@{/members}">회원 목록</a>
-            <a th:href="@{/{restId}/waitlist(restId=${restaurant.restId})}">대기 목록</a>
+<!--            <a th:href="@{/members}">회원 목록</a>-->
+<!--            <a th:href="@{/{restId}/waitlist(restId=${restaurant.restId})}">대기 목록</a>-->
             <a th:href="@{/{restId}/manage(restId=${restaurant.restId})}">대기목록 관리</a>
             <div style="float:right;">
                 <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
