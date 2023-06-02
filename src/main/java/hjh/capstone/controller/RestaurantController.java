@@ -78,7 +78,7 @@ public class RestaurantController
 
         Wait wait = waitService.createNewWait(restId, memberId);
         model.addAttribute("waitNumber", wait.getWaitNumber());
-        return "waiting/waiting4";
+        return "waiting/waiting2";
     }
 
 

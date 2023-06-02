@@ -3,7 +3,6 @@ package hjh.capstone.controller;
 import hjh.capstone.domain.member.Member;
 import hjh.capstone.domain.notification.Notification;
 import hjh.capstone.domain.wait.Wait;
-import hjh.capstone.service.NotificationService;
 import hjh.capstone.service.WaitService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -18,15 +17,12 @@ public class NotificationController
 {
     private final WaitService waitService;
     private final SimpMessagingTemplate simpMessagingTemplate;
-    private final NotificationService notificationService;
     private Notification notification;
 
-    public NotificationController(WaitService waitService, SimpMessagingTemplate simpMessagingTemplate,
-                                  NotificationService notificationService)
+    public NotificationController(WaitService waitService, SimpMessagingTemplate simpMessagingTemplate)
     {
         this.waitService = waitService;
         this.simpMessagingTemplate = simpMessagingTemplate;
-        this.notificationService = notificationService;
     }
 
     @PostMapping("/{restId}/notice")
@@ -43,9 +39,10 @@ public class NotificationController
 
         notification = new Notification(title, body, icon);
 
-//        notificationService.sendNotification(notification);
         simpMessagingTemplate.convertAndSend("/notifications", notification);
-        System.out.println("notification = " + notification);
+        System.out.println("notification.title = " + notification.getTitle());
+        System.out.println("notification.body = " + notification.getBody());
+        System.out.println("notification.icon = " + notification.getIcon());
 
         return "redirect:/" + restId + "/manage";
     }

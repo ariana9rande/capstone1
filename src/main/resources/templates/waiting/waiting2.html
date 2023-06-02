@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/under768nav.js}"></script>
 </head>
@@ -30,39 +31,11 @@
     </div>
     <div class="leftcolumn">
         <div class="card">
-            <h2>방문 예정 인원</h2>
-            <h3>성인
-                <select>
-                    <option value="1">1명</option>
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="4">4명</option>
-                    <option value="5">5명</option>
-                    <option value="6">6명</option>
-                    <option value="7">7명</option>
-                    <option value="8">8명</option>
-                    <option value="9">9명</option>
-                    <option value="10">10명</option>
-                </select>
-            </h3>
-            <h3>유아
-                <select>
-                    <option value="0">0명</option>
-                    <option value="1">1명</option>
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="4">4명</option>
-                    <option value="5">5명</option>
-                    <option value="6">6명</option>
-                    <option value="7">7명</option>
-                    <option value="8">8명</option>
-                    <option value="9">9명</option>
-                    <option value="10">10명</option>
-                </select>
-            </h3>
+            <h2>원격 줄서기 신청 완료</h2>
+            <h3 th:text="'대기 번호: ' + ${waitNumber} + '번'"></h3>
         </div>
         <div class="card">
-            <button th:onclick="|location.href='@{/{restId}/waiting3(restId=${restaurant.restId})}'|">다음으로</button>
+            <button th:onclick="|location.href='@{/{restId}(restId=${restaurant.restId})}'|">확인</button>
         </div>
     </div>
 </div>

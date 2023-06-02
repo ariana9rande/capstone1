@@ -1,7 +1,6 @@
 package hjh.capstone.controller;
 
 import hjh.capstone.domain.member.Member;
-import hjh.capstone.service.FCMService;
 import hjh.capstone.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +16,10 @@ import java.util.List;
 public class MemberController
 {
     private final MemberService memberService;
-    private final FCMService fcmService;
 
-    public MemberController(MemberService memberService, FCMService fcmService)
+    public MemberController(MemberService memberService)
     {
         this.memberService = memberService;
-        this.fcmService = fcmService;
     }
 
     @GetMapping("/members/new")
@@ -65,8 +62,6 @@ public class MemberController
             return "login";
         }
 
-//        String token = memberService.generateNewToken(member.getMemberId());
-//        memberService.updateToken(member.getMemberId(), token);
         session.setAttribute("loginMember", member);
         return "redirect:/";
     }
