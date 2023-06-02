@@ -10,7 +10,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer
 {
-
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry)
     {
@@ -26,28 +25,3 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer
         registry.setApplicationDestinationPrefixes("/app");
     }
 }
-
-//import org.springframework.web.reactive.socket.WebSocketHandler;
-//import org.springframework.web.reactive.socket.WebSocketSession;
-//import reactor.core.publisher.Mono;
-//
-//public class NotificationWebSocketHandler implements WebSocketHandler
-//{
-//
-//    private final String vapidPublicKey;
-//    private final String vapidPrivateKey;
-//
-//    public NotificationWebSocketHandler(String vapidPublicKey, String vapidPrivateKey) {
-//        this.vapidPublicKey = vapidPublicKey;
-//        this.vapidPrivateKey = vapidPrivateKey;
-//    }
-//
-//    @Override
-//    public Mono<Void> handle(WebSocketSession session) {
-//        // WebSocket 세션 처리 로직 작성
-//        return session.send(...)
-//            .then(session.receive()
-//                .doOnNext(...)
-//                .then());
-//    }
-//}

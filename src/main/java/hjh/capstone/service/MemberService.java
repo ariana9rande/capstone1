@@ -25,7 +25,6 @@ public class MemberService
     {
         validateDuplicateMember(member);
         memberRepository.save(member);
-//        return member.getMemberId();
     }
 
     public void validateDuplicateMember(Member member) {
@@ -50,24 +49,4 @@ public class MemberService
     {
         return memberRepository.findByNameAndPassword(memberName, password);
     }
-
-//    @Transactional
-//    public void updateToken(Long memberId, String token)
-//    {
-//        Member member = findMemberById(memberId);
-//        member.setToken(token);
-//        memberRepository.update(member);
-//    }
-//
-//    public String generateNewToken(Long memberId)
-//    {
-//        String uniqueId = UUID.randomUUID().toString();
-//
-//        return "" + memberId + uniqueId;
-//    }
-//
-//    public boolean verifyFCMToken(String token)
-//    {
-//        return memberRepository.verifyToken(token);
-//    }
 }

@@ -31,8 +31,6 @@ public class NotificationController
         Wait wait = waitService.findById(waitId);
         Member member = wait.getMember();
 
-        System.out.println("/" + restId + "/notice" + " postMapping 완료");
-
         String title = "입장 안내";
         String body = "대기번호 " + wait.getWaitNumber() + "번 입장 5분 전입니다.";
         String icon = "/images/favicon.ico";
@@ -40,9 +38,6 @@ public class NotificationController
         notification = new Notification(title, body, icon);
 
         simpMessagingTemplate.convertAndSend("/notifications", notification);
-        System.out.println("notification.title = " + notification.getTitle());
-        System.out.println("notification.body = " + notification.getBody());
-        System.out.println("notification.icon = " + notification.getIcon());
 
         return "redirect:/" + restId + "/manage";
     }
