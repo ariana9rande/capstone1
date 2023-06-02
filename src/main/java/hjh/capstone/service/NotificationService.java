@@ -13,5 +13,4 @@ public class NotificationService
     @Value("${webpush.vapid.private-key}")
     private String vapidPrivateKey;
 
-
 }

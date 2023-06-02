@@ -123,6 +123,27 @@
         });
     }
 
+    setInterval(function() {
+        fetch('/notifications')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                // 수신된 알림 처리
+                if (data.title && data.body && data.icon) {
+                    showNotification(data.title, data.body, data.icon);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error fetching notifications:', error);
+            });
+    }, 1000);
+
+    function showNotification(title, body, icon) {
+        if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification(title, { body: body, icon: icon });
+        }
+    }
 </script>
 </body>
 </html>

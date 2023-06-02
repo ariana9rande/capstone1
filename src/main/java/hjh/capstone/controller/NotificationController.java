@@ -58,6 +58,9 @@ public class NotificationController
 
         Notification notification = new Notification(title, body, icon);
 
+//        notificationService.sendNotification(notification);
+        simpMessagingTemplate.convertAndSend("/notifications", notification);
+
         return "redirect:/" + restId + "/manage";
     }
 
