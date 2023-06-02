@@ -65,8 +65,8 @@ public class MemberController
             return "login";
         }
 
-        String token = memberService.generateNewToken(member.getMemberId());
-        memberService.updateToken(member.getMemberId(), token);
+//        String token = memberService.generateNewToken(member.getMemberId());
+//        memberService.updateToken(member.getMemberId(), token);
         session.setAttribute("loginMember", member);
         return "redirect:/";
     }

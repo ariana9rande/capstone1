@@ -33,6 +33,8 @@ dependencies {
     implementation 'org.springframework:spring-messaging:5.3.20'
     implementation 'org.springframework:spring-websocket:5.3.20'
     implementation 'org.springframework.integration:spring-integration-core:5.5.0'
+    implementation 'nl.martijndwars:web-push:5.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 
 tasks.named('test') {

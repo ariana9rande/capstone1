@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
@@ -52,23 +51,23 @@ public class MemberService
         return memberRepository.findByNameAndPassword(memberName, password);
     }
 
-    @Transactional
-    public void updateToken(Long memberId, String token)
-    {
-        Member member = findMemberById(memberId);
-        member.setToken(token);
-        memberRepository.update(member);
-    }
-
-    public String generateNewToken(Long memberId)
-    {
-        String uniqueId = UUID.randomUUID().toString();
-
-        return "" + memberId + uniqueId;
-    }
-
-    public boolean verifyFCMToken(String token)
-    {
-        return memberRepository.verifyToken(token);
-    }
+//    @Transactional
+//    public void updateToken(Long memberId, String token)
+//    {
+//        Member member = findMemberById(memberId);
+//        member.setToken(token);
+//        memberRepository.update(member);
+//    }
+//
+//    public String generateNewToken(Long memberId)
+//    {
+//        String uniqueId = UUID.randomUUID().toString();
+//
+//        return "" + memberId + uniqueId;
+//    }
+//
+//    public boolean verifyFCMToken(String token)
+//    {
+//        return memberRepository.verifyToken(token);
+//    }
 }

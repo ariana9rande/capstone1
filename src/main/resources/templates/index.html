@@ -111,7 +111,7 @@
         let longitude = position.coords.longitude;
     }
 
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('/js/service-worker.js')
                 .then(function(registration) {
@@ -122,6 +122,7 @@
                 });
         });
     }
+
 </script>
 </body>
 </html>

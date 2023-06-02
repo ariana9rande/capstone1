@@ -18,11 +18,11 @@ public class FCMService
 
     public void sendNotification(String token, String title, String body)
     {
-        if(!memberService.verifyFCMToken(token))
-        {
-            System.out.println("FCMService.sendNotification : 유효하지 않은 FCM token");
-            return;
-        }
+//        if(!memberService.verifyFCMToken(token))
+//        {
+//            System.out.println("FCMService.sendNotification : 유효하지 않은 FCM token");
+//            return;
+//        }
 
         try
         {

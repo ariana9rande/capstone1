@@ -3,6 +3,7 @@ package hjh.capstone.controller;
 import hjh.capstone.domain.member.Member;
 import hjh.capstone.domain.notification.Notification;
 import hjh.capstone.domain.wait.Wait;
+import hjh.capstone.service.NotificationService;
 import hjh.capstone.service.WaitService;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,13 @@ public class NotificationController
 {
     private final WaitService waitService;
     private final SimpMessagingTemplate simpMessagingTemplate;
+    private final NotificationService notificationService;
 
-    public NotificationController(WaitService waitService, SimpMessagingTemplate simpMessagingTemplate)
+    public NotificationController(WaitService waitService, SimpMessagingTemplate simpMessagingTemplate, NotificationService notificationService)
     {
         this.waitService = waitService;
         this.simpMessagingTemplate = simpMessagingTemplate;
+        this.notificationService = notificationService;
     }
 
 //    @GetMapping("/{restId}/notice")
@@ -54,8 +57,6 @@ public class NotificationController
         String icon = "/images/favicon.ico";
 
         Notification notification = new Notification(title, body, icon);
-
-        simpMessagingTemplate.convertAndSendToUser(String.valueOf(member.getMemberId()), "/queue/notifications", notification);
 
         return "redirect:/" + restId + "/manage";
     }
