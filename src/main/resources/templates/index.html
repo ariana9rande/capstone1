@@ -34,8 +34,6 @@
     <h1>Test</h1>
 </div>
 <div class="topnav">
-    <!--    <a class="topnav-item" th:href="@{/}"><img src="" style="width: 50px; height: 50px;"><br/>홈</a>-->
-    <!--    <a class="topnav-item" th:href="@{/search}"><img src="" style="width: 50px; height: 50px;"><br/>검색</a>-->
     <a class="topnav-item" th:href="@{/}"
        th:classappend="${#httpServletRequest.requestURI == '/'} ? 'topnav-item--selected'"><img src=""
                                                                                                 style="width: 50px; height: 50px;"><br/>홈</a>
@@ -121,28 +119,6 @@
                     alert('Service Worker 등록 실패:');
                 });
         });
-    }
-
-    setInterval(function() {
-        fetch('/notifications')
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                // 수신된 알림 처리
-                if (data.title && data.body && data.icon) {
-                    showNotification(data.title, data.body, data.icon);
-                }
-            })
-            .catch(function(error) {
-                console.error('Error fetching notifications:', error);
-            });
-    }, 1000);
-
-    function showNotification(title, body, icon) {
-        if ('Notification' in window && Notification.permission === 'granted') {
-            new Notification(title, { body: body, icon: icon });
-        }
     }
 </script>
 </body>
