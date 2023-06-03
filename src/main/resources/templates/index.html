@@ -15,9 +15,6 @@
     <div>
         <a th:href="@{/members/new}">회원가입</a>
         <a th:href="@{/login}">로그인</a>
-<!--        <a th:href="@{/members}">회원 목록</a>-->
-<!--        <a th:href="@{/restaurants}">식당 목록</a>-->
-<!--        <a th:href="@{/waitlist}">대기 목록</a>-->
         <div style="float:right;">
             <a th:if="${session.loginMember != null and session.loginMember.memberName != null}"
                th:text="${session.loginMember.memberName} + '님'"></a>
@@ -30,7 +27,7 @@
         <span></span>
         <span></span>
     </div>
-    <h1>Test</h1>
+    <h1>테이블링 서비스</h1>
 </div>
 <div class="topnav">
     <a class="topnav-item" th:href="@{/}"
@@ -102,15 +99,27 @@
     }
 
     function showPosition(position) {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        console.log("위도: " + latitude);
+        console.log("경도: " + longitude);
+
+        var geocoder = new kakao.maps.services.Geocoder();
+        geocoder.coord2Address(longitude, latitude, function (result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var address = result[0].address.address_name;
+                var locationElement = document.getElementById("location");
+                locationElement.textContent = address;
+            }
+        });
     }
 
     if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('/js/service-worker.js')
                 .then(function(registration) {
-                    alert('Service Worker 등록 성공:');
+                    console.log('Service Worker 등록 성공:');
                 })
                 .catch(function(error) {
                     alert('Service Worker 등록 실패:');

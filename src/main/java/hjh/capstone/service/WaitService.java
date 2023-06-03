@@ -69,4 +69,10 @@ public class WaitService
     {
         return waitRepository.findById(waitId);
     }
+
+    @Transactional
+    public void enterWait(Long waitId)
+    {
+        waitRepository.enterWait(waitId);
+    }
 }

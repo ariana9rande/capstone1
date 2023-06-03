@@ -144,4 +144,12 @@ public class WaitRepositoryImpl implements WaitRepository
     {
         return em.find(Wait.class, waitId);
     }
+
+    @Override
+    public void enterWait(Long waitId)
+    {
+        Wait wait = findById(waitId);
+        wait.setEntered(true);
+        save(wait);
+    }
 }

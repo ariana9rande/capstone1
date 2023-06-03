@@ -50,19 +50,12 @@ public class ManageController
         return "redirect:/{restId}/manage";
     }
 
-//    @GetMapping("/{restId}/notice")
-//    public String notice(@PathVariable Long restId, @RequestParam Long waitId, RedirectAttributes redirectAttributes) {
-//        Wait wait = waitService.findById(waitId);
-//        Member member = memberService.findMemberById(wait.getMember().getMemberId());
-//
-//        // 알림 전송 로직 추가 필요
-//
-//        redirectAttributes.addAttribute("check", true);
-//        redirectAttributes.addAttribute("notificationSent", true);
-//        redirectAttributes.addAttribute("notificationSentTime", LocalDateTime.now());
-//
-//        return "redirect:/" + restId + "/manage?check={check}&notificationSent={notificationSent}&notificationSentTime={notificationSentTime}";
-//    }
+    @GetMapping("/{restId}/manage/{waitId}/enter")
+    public String enterWait(@PathVariable Long restId, @PathVariable Long waitId)
+    {
+        waitService.enterWait(waitId);
+        return "redirect:/{restId}/manage";
+    }
 
     @GetMapping("/{restId}/waitlist")
     public String waitList(@PathVariable Long restId, Model model)

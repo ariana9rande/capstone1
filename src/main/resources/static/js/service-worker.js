@@ -25,9 +25,3 @@ self.addEventListener('push', function(event) {
 setInterval(function() {
     self.dispatchEvent(new Event('push')); // push 이벤트 디스패치
 }, 1000);
-
-// function showNotification(title, body, icon) {
-//     if ('Notification' in window && Notification.permission === 'granted') {
-//         new Notification(title, { body: body, icon: icon });
-//     }
-// }
