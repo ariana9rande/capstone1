@@ -34,7 +34,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="wait : ${waits}">
+                <tr th:each="wait : ${waits}" th:if="${wait.isEntered() == false}">
                     <td th:text="${wait.waitNumber}"></td>
                     <td th:text="${wait.member.memberName}"></td>
                     <td th:text="${wait.startTime}"></td>
