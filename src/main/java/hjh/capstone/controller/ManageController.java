@@ -53,7 +53,8 @@ public class ManageController
     @GetMapping("/{restId}/manage/{waitId}/enter")
     public String enterWait(@PathVariable Long restId, @PathVariable Long waitId)
     {
-        waitService.enterWait(waitId);
+//        waitService.enterWait(waitId);
+        waitService.deleteWaitById(waitId);
         return "redirect:/{restId}/manage";
     }
 
