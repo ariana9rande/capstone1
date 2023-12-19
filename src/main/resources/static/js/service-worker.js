@@ -1,3 +1,8 @@
+function generateUniqueTag() {
+    const timestamp = new Date().getTime();
+    return 'tag-' + timestamp;
+}
+
 self.addEventListener('push', function(event) {
     event.waitUntil(
         fetch('/notifications')
@@ -13,6 +18,11 @@ self.addEventListener('push', function(event) {
                     body: body,
                     icon: icon
                 };
+
+                // Generate a unique tag using timestamp
+                options.tag = generateUniqueTag();
+
+                // Show the new notification
                 return self.registration.showNotification(title, options);
             })
             .catch(function(error) {
@@ -21,7 +31,7 @@ self.addEventListener('push', function(event) {
     );
 });
 
-//1초마다 알림 확인
+// 1초마다 알림 확인
 setInterval(function() {
     self.dispatchEvent(new Event('push')); // push 이벤트 디스패치
 }, 1000);
