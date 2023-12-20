@@ -3,7 +3,9 @@ package hjh.capstone.domain.member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -36,7 +38,17 @@ public class MemberRepositoryImpl implements MemberRepository
         {
             return null;
         }
-        return em.find(Member.class, memberName);
+        try
+        {
+            String query = "SELECT m FROM Member m WHERE m.memberName = :memberName";
+            TypedQuery<Member> typedQuery = em.createQuery(query, Member.class);
+            typedQuery.setParameter("memberName", memberName);
+            return typedQuery.getSingleResult();
+        }
+        catch (NoResultException e)
+        {
+            return null;
+        }
     }
 
 

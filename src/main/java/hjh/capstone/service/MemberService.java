@@ -21,10 +21,17 @@ public class MemberService
     }
 
     @Transactional
-    public void join(Member member)
+    public void join(Member member) throws Exception
     {
-        validateDuplicateMember(member);
-        memberRepository.save(member);
+        try
+        {
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+        }
+        catch (IllegalStateException e)
+        {
+            throw new Exception(e.getMessage());
+        }
     }
 
     public void validateDuplicateMember(Member member) {

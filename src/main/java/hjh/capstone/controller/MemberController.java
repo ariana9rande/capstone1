@@ -29,16 +29,28 @@ public class MemberController
     }
 
     @PostMapping("members/new")
-    public String register(MemberForm form)
+    public String register(MemberForm form, Model model) throws Exception
     {
         Member member = new Member();
+        System.out.println("member.id = " + member.getMemberId());
         member.setMemberName(form.getName());
+        System.out.println("member.name = " + member.getMemberName());
         member.setEmail(form.getEmail());
+        System.out.println("member.email = " + member.getEmail());
         member.setPassword(form.getPassword());
+        System.out.println("member.password = " + member.getPassword());
 
-        memberService.join(member);
+        try
+        {
+            memberService.join(member);
 
-        return "redirect:/";
+            return "redirect:/";
+        }
+        catch(Exception e)
+        {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "members/join";
+        }
     }
 
     @GetMapping("/login")
@@ -48,7 +60,7 @@ public class MemberController
         {
             model.addAttribute("loggedInMessage", "이미 로그인 중입니다.");
         }
-        return "login";
+        return "members/login";
     }
 
     @PostMapping("/login")
@@ -59,7 +71,7 @@ public class MemberController
         if (member == null)
         {
             model.addAttribute("errorMessage", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "login";
+            return "memebers/login";
         }
 
         session.setAttribute("loginMember", member);

@@ -52,7 +52,7 @@ public class DataLoader implements CommandLineRunner
 //            restaurantRepository.save(new Restaurant("샌드위치", "이태원", "양식", 4.1, "image8.jpg", 37.53451, 126.99415, 3.0));
 
             // 레스토랑 1
-            Restaurant restaurant1 = new Restaurant("밥이랑", "강남", "한식", 4.5, "image1.jpg", 37.12345, 127.12345, 2.5);
+            Restaurant restaurant1 = new Restaurant("밥이랑", "강남", "한식", 4.5, "/images/image1.jpg", 37.12345, 127.12345, 2.5);
             List<Menu> menus1 = new ArrayList<>();
             List<Wait> waits1 = new ArrayList<>();
             menus1.add(new Menu("김치찌개", 8000, "image1-1.jpg", restaurant1));
@@ -68,7 +68,7 @@ public class DataLoader implements CommandLineRunner
 //            restaurantRepository.save(restaurant1);
 
             // 레스토랑 2
-            Restaurant restaurant2 = new Restaurant("Pizza Heaven", "홍대", "양식", 4.0, "image2.jpg", 37.54321, 126.98765, 3.8);
+            Restaurant restaurant2 = new Restaurant("Pizza Heaven", "홍대", "양식", 4.0, "/images/image2.jpg", 37.54321, 126.98765, 3.8);
             List<Menu> menus2 = new ArrayList<>();
             menus2.add(new Menu("페퍼로니 피자", 15000, "image2-1.jpg", restaurant2));
             menus2.add(new Menu("치즈 피자", 14000, "image2-2.jpg", restaurant2));
@@ -79,7 +79,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant2);
 
             // 레스토랑 3
-            Restaurant restaurant3 = new Restaurant("마키야", "신촌", "일식", 3.5, "image3.jpg", 37.55555, 126.93611, 1.2);
+            Restaurant restaurant3 = new Restaurant("마키야", "신촌", "일식", 3.5, "/images/image3.jpg", 37.55555, 126.93611, 1.2);
             List<Menu> menus3 = new ArrayList<>();
             menus3.add(new Menu("초밥 세트", 25000, "image3-1.jpg", restaurant3));
             menus3.add(new Menu("덮밥", 8000, "image3-2.jpg", restaurant3));
@@ -90,7 +90,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant3);
 
             // 레스토랑 4
-            Restaurant restaurant4 = new Restaurant("카레집", "건대", "인도 요리", 4.3, "image4.jpg", 37.54033, 127.06914, 1.8);
+            Restaurant restaurant4 = new Restaurant("카레집", "건대", "인도 요리", 4.3, "/images/image4.jpg", 37.54033, 127.06914, 1.8);
             List<Menu> menus4 = new ArrayList<>();
             menus4.add(new Menu("치킨 카레", 9000, "image4-1.jpg", restaurant4));
             menus4.add(new Menu("양채 카레", 10000, "image4-2.jpg", restaurant4));
@@ -101,7 +101,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant4);
 
             // 레스토랑 5
-            Restaurant restaurant5 = new Restaurant("덮밥집", "잠실", "일식", 3.8, "image5.jpg", 37.51122, 127.09892, 4.5);
+            Restaurant restaurant5 = new Restaurant("덮밥집", "잠실", "일식", 3.8, "/images/image5.jpg", 37.51122, 127.09892, 4.5);
             List<Menu> menus5 = new ArrayList<>();
             menus5.add(new Menu("카츠동", 8000, "image5-1.jpg", restaurant5));
             menus5.add(new Menu("돈까스 덮밥", 7500, "image5-2.jpg", restaurant5));
@@ -112,7 +112,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant5);
 
             // 레스토랑 6
-            Restaurant restaurant6 = new Restaurant("햄버거 집", "성수", "양식", 4.7, "image6.jpg", 37.54252, 127.04445, 2.2);
+            Restaurant restaurant6 = new Restaurant("햄버거 집", "성수", "양식", 4.7, "/images/image6.jpg", 37.54252, 127.04445, 2.2);
             List<Menu> menus6 = new ArrayList<>();
             menus6.add(new Menu("치즈버거", 7000, "image6-1.jpg", restaurant6));
             menus6.add(new Menu("불고기버거", 8000, "image6-2.jpg", restaurant6));
@@ -123,7 +123,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant6);
 
             // 레스토랑 7
-            Restaurant restaurant7 = new Restaurant("돼지국밥", "노량진", "한식", 3.9, "image7.jpg", 37.51233, 126.94298, 1.5);
+            Restaurant restaurant7 = new Restaurant("돼지국밥", "노량진", "한식", 3.9, "/images/image7.jpg", 37.51233, 126.94298, 1.5);
             List<Menu> menus7 = new ArrayList<>();
             menus7.add(new Menu("돼지국밥", 8000, "image7-1.jpg", restaurant7));
             menus7.add(new Menu("순대국밥", 8000, "image7-2.jpg", restaurant7));
@@ -134,7 +134,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant7);
 
             // 레스토랑 8
-            Restaurant restaurant8 = new Restaurant("샌드위치", "이태원", "양식", 4.1, "image8.jpg", 37.53451, 126.99415, 3.0);
+            Restaurant restaurant8 = new Restaurant("샌드위치", "이태원", "양식", 4.1, "/images/image8.jpg", 37.53451, 126.99415, 3.0);
             List<Menu> menus8 = new ArrayList<>();
             menus8.add(new Menu("터키 샌드위치", 8000, "image8-1.jpg", restaurant8));
             menus8.add(new Menu("이탈리안 샌드위치", 10000, "image8-2.jpg", restaurant8));
@@ -145,7 +145,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant8);
 
             // 레스토랑 9
-            Restaurant restaurant9 = new Restaurant("감바스 알 아히요", "홍대", "양식", 4.3, "image9.jpg", 37.55555, 126.93611, 2.7);
+            Restaurant restaurant9 = new Restaurant("감바스 알 아히요", "홍대", "양식", 4.3, "/images/image9.jpg", 37.55555, 126.93611, 2.7);
             List<Menu> menus9 = new ArrayList<>();
             menus9.add(new Menu("감바스 알 아히요", 15000, "image9-1.jpg", restaurant9));
             menus9.add(new Menu("스테이크", 25000, "image9-2.jpg", restaurant9));
@@ -156,7 +156,7 @@ public class DataLoader implements CommandLineRunner
             restaurantRepository.save(restaurant9);
 
             // 레스토랑 10
-            Restaurant restaurant10 = new Restaurant("할매국밥", "건대", "한식", 4.1, "image10.jpg", 37.55555, 126.93611, 1.8);
+            Restaurant restaurant10 = new Restaurant("할매국밥", "건대", "한식", 4.1, "/images/image10.jpg", 37.55555, 126.93611, 1.8);
             List<Menu> menus10 = new ArrayList<>();
             menus10.add(new Menu("국밥", 8000, "image10-1.jpg", restaurant10));
             menus10.add(new Menu("뼈해장국", 9000, "image10-2.jpg", restaurant10));
