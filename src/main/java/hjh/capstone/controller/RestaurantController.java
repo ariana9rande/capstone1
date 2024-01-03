@@ -70,7 +70,7 @@ public class RestaurantController
         if(memberId == null)
         {
             model.addAttribute("loginMessage", "로그인 후 이용해주세요.");
-            return "login";
+            return "members/login";
         }
 
         Restaurant restaurant = restaurantService.findRestaurant(restId);

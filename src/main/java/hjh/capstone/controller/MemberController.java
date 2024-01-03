@@ -71,7 +71,7 @@ public class MemberController
         if (member == null)
         {
             model.addAttribute("errorMessage", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "memebers/login";
+            return "members/login";
         }
 
         session.setAttribute("loginMember", member);
